@@ -62,13 +62,21 @@ export default {
   width: 100%;
   height: 30px;
   margin-bottom: 10px;
-  background-color: red;
+  // background-color: red;
 }
 .tagItem {
-  border: 1px solid #ccc;
   float: left;
+  width: auto;
   height: 30px;
   line-height: 30px;
+  color: #8f8f8f;
   font-size: 0.9em;
+  font-weight: bold;
+  padding: 0 18px;
+  margin-right: 10px;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 8px;
+  border: 1px solid rgb(143, 143, 143);
 }
 </style>

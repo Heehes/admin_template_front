@@ -39,7 +39,7 @@ export default {
         height: 100%;
         .el-header{
             background: rgb(65, 125, 245);
-            box-shadow: 0 0px 20px 0px rgb(65, 125, 245);
+            box-shadow: 0 0px 10px 0px rgb(65, 125, 245);
         }
         .el-container{
             overflow: hidden;
@@ -49,7 +49,7 @@ export default {
             }
             .el-main{
                 padding: 10px 20px;
-                background-color: #000000
+                // background-color: #000000
             }
         }
     }
