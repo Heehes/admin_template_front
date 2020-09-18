@@ -1,0 +1,77 @@
+$main-bg-color: rgb(65, 125, 245); //主要
+$main-font-color: #fff;
+$main-border-color:rgb(143, 143, 143);;
+$hover-main-bg-color: rgb(124, 168, 255);
+$hover-main-font-color: #fff;
+
+.theme {
+  .el-container {
+    .el-header {
+      background: $main-bg-color;
+      box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.5);
+    }
+    .el-container {
+      .el-aside {
+        background-color: #fff;
+        box-shadow: -10px 10px 20px 0px #000000;
+        .unfoldBtn{
+          i{
+            color: #fff;
+            font-size: 30px;
+          }
+          background-color: #e41313;
+        }
+      }
+      .el-main {
+        .pageBox{
+          background-color: #fff;
+        }
+      }
+    }
+  }
+
+  .tagView {
+    .tagItem {
+      border: 1px solid $main-border-color;
+      span {
+        color: $main-border-color;
+      }
+      i {
+        color: #fff;
+      }
+      i:hover {
+        color: $hover-main-bg-color
+      }
+    }
+    .tagItem:hover {
+      span {
+        color: #fff;
+      }
+      border-color:$main-bg-color;
+      background-color: $main-bg-color;
+    }
+    .tagItem.checked {
+      span {
+        color: #fff;
+      }
+      border-color: $main-bg-color;
+      background-color: $main-bg-color;
+    }
+    .tagItem.checked.cantClose:hover {
+      span {
+        padding: 0 15px;
+      }
+      i {
+        width: 0px;
+      }
+    }
+    .tagItem.checked:hover {
+      span {
+        padding: 0 5px;
+      }
+      i {
+        width: 20px;
+      }
+    }
+  }
+}

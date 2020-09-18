@@ -6,6 +6,13 @@
   "description": "uspring",
   "glyphs": [
     {
+      "icon_id": "6204091",
+      "name": "关  闭",
+      "font_class": "guanbi",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
       "icon_id": "344066",
       "name": "菜单",
       "font_class": "caidan",
@@ -137,13 +144,6 @@
       "font_class": "shouye",
       "unicode": "e653",
       "unicode_decimal": 58963
-    },
-    {
-      "icon_id": "16136916",
-      "name": "关闭",
-      "font_class": "guanbi",
-      "unicode": "e603",
-      "unicode_decimal": 58883
     }
   ]
 }

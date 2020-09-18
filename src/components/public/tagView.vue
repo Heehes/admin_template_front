@@ -1,10 +1,17 @@
 <template>
   <div class="tagView">
-    <div class="tagItem">
-      首页
+    <div class="tagItem" v-for="i in 20" :class="{ checked: $route.name == 'Home' }" @click="jump('Home')">
+      <span>首页</span>
     </div>
-    <div class="tagItem" v-for="(tag, index) in list" :key="index" @click="toggleTag(tag, 'remove')">
-      {{ tag.meta.title || tag.name }}
+    <div
+      class="tagItem"
+      :class="{ checked: $route.name == tag.name, cantClose: tag.meta ? tag.meta.cantClose : false }"
+      @click="jump(tag.name)"
+      v-for="(tag, index) in list"
+      :key="index"
+    >
+      <span>{{ tag.meta ? tag.meta.title : tag.name }}</span>
+      <i class="iconfont u-guanbi" @click.stop="toggleTag(tag, 'remove')" />
     </div>
   </div>
 </template>
@@ -27,8 +34,11 @@ export default {
     },
   },
   mounted() {
-      if(this.cache){
-      }
+    if (this.cache) {
+    } else {
+      // 设置首页
+      this.$store.commit("setTagList", [this.$router.options.routes.find((item) => item.path == "/").children[0]]);
+    }
   },
   methods: {
     toggleTag(tag, type) {
@@ -50,8 +60,7 @@ export default {
         });
       }
       this.$store.commit("setTagList", data);
-      if(this.cache){
-          
+      if (this.cache) {
       }
     },
   },
@@ -59,24 +68,55 @@ export default {
 </script>
 <style lang="scss" scoped>
 .tagView {
-  width: 100%;
+  white-space: nowrap;
+  width: calc(100% - 30px);
+  margin-left: 30px;
   height: 30px;
   margin-bottom: 10px;
-  // background-color: red;
-}
-.tagItem {
-  float: left;
-  width: auto;
-  height: 30px;
-  line-height: 30px;
-  color: #8f8f8f;
-  font-size: 0.9em;
-  font-weight: bold;
-  padding: 0 18px;
-  margin-right: 10px;
-  cursor: pointer;
-  user-select: none;
-  border-radius: 8px;
-  border: 1px solid rgb(143, 143, 143);
+  .tagItem {
+    padding: 0 5px;
+    display: inline-block;
+    width: auto;
+    height: 30px;
+    line-height: 30px;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-right: 10px;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 8px;
+    overflow: hidden;
+    span {
+      letter-spacing: 1px;
+      transition: padding 0.3s;
+      float: left;
+      padding: 0 15px;
+    }
+    i {
+      transition: width 0.3s;
+      font-size: 0.8em;
+      float: left;
+      overflow: hidden;
+      width: 0px;
+    }
+    i:hover {
+    }
+  }
+  .tagItem:hover {
+    span {
+      padding: 0 5px;
+    }
+    i {
+      width: 20px;
+    }
+  }
+  .tagItem.cantClose:hover {
+    span {
+      padding: 0 15px !important;
+    }
+    i {
+      width: 0px !important;
+    }
+  }
 }
 </style>

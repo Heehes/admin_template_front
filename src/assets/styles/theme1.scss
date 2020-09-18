@@ -1,0 +1,37 @@
+// #CCCC99
+// #333333
+// #9966CC
+$mainColor: rgb(65, 125, 245); //主要
+$heightLight: rgb(117, 163, 255); //高亮
+.theme {
+  .el-container {
+    .el-header {
+      background: $mainColor;
+      box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.5);
+    }
+    .el-container {
+      .el-aside {
+        background-color: #fff;
+        box-shadow: -10px 10px 20px 0px #000000;
+      }
+      .el-main {
+      }
+    }
+  }
+  
+  .tagView {
+    .tagItem {
+      color: rgb(143, 143, 143);
+      border: 1px solid rgb(143, 143, 143);
+    }
+    .tagItem.checked {
+      color: rgb(65, 125, 245);
+      border: 1px solid rgb(143, 143, 143);
+    }
+  }
+
+
+
+
+}
+
