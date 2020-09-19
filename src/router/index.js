@@ -16,6 +16,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
+    hidden: true,
     component: Login
   },
   {
@@ -26,6 +27,7 @@ const routes = [
   {
     // 首页
     path: '/',
+    name: '',
     component: Layout,
     redirect: '/home',
     children: [{

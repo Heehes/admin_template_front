@@ -12,7 +12,7 @@ body,
   font-size: 14px;
 }
 
-/* fade-transform */
+/* fade-transform 页面切换 */
 .fade-transform-leave-active,
 .fade-transform-enter-active {
   transition: all 0.5s;
@@ -35,12 +35,29 @@ body,
   fill: currentColor;
   overflow: hidden;
 }
-
 // layout
 .el-container {
   width: 100%;
   height: 100%;
   .el-header {
+    .userInfoBox{
+      height: 100%;
+      float: right;
+      >div{
+        float: left;
+        width: auto;
+        height: 100%;
+        line-height: 80px;
+        overflow: hidden;
+        user-select: none;
+        margin: 0 8px;
+        i{
+          margin: 0 5px;
+        }
+        span{
+        }
+      }
+    }
   }
   .el-container {
     overflow: hidden;
@@ -49,23 +66,26 @@ body,
       overflow: initial;
       transition: width .2s;
       box-shadow: -10px 10px 20px 0px #000000;
-      .unfoldBtn{
+      .isCollapseBtn{
         width: 30px;
         height: 30px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        box-shadow: 4px 4px 5px -1px #00000044;
+        border-left:none;
         position: absolute;
+        z-index: 1;
         top: 10px;
         right: -30px;
         cursor: pointer;
         i{
+          line-height: 30px;
           transition: all .3s;
           font-size: 30px;
           transform: rotateY(360deg);
         }
       }
-    }
-    .el-aside.unfold{
-      width:60px !important;
-      .unfoldBtn{
+      .isCollapseBtn.isCollapse{
         i{
           transform: rotateY(180deg);
         }

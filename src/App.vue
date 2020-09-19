@@ -6,6 +6,7 @@
 
 <style lang="scss">
 #app {
+  min-width: 1400px;
   background-color: rgb(238, 238, 238);
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

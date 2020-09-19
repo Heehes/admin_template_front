@@ -1,16 +1,21 @@
 <template>
   <el-container>
     <el-header>
+      <div class="userInfoBox">
+        <div><i class="iconfont u-59" /><span>2020-04-03 15:48:12</span></div>
+        <div><i class="iconfont u-yonghu1" /><span>您好，哈哈哈</span></div>
+        <div style="cursor: pointer;" @click="logOut"><i class="iconfont u-guanji " /><span>退出</span></div>
+      </div>
     </el-header>
     <el-container>
-      <el-aside width="200px" :class="{unfold:unfold}">
-        <div class="unfoldBtn" @click="unfold = !unfold">
+      <el-aside width="auto">
+        <div class="isCollapseBtn" :class="{isCollapse:isCollapse}" @click="isCollapse = !isCollapse">
           <i class="el-icon-s-fold"></i>
         </div>
-        Aside
+        <Menu :isCollapse="isCollapse"></Menu>
       </el-aside>
       <el-main>
-        <tagView :cache="false"></tagView>
+        <TagView :cache="true"></TagView>
         <div class="pageBox" style="height:calc(100% - 40px)">
           <transition name="fade-transform" mode="out-in">
             <router-view :key="key" />
@@ -22,11 +27,13 @@
 </template>
 
 <script>
-import tagView from '@/components/public/tagView.vue'
+import Menu from '@/components/public/menu.vue'
+import TagView from '@/components/public/tagView.vue'
 export default {
   name: "Layout",
   components:{
-      tagView
+      TagView,
+      Menu
   },
   computed: {
     key() {
@@ -35,9 +42,17 @@ export default {
   },
   data() {
     return {
-      unfold:true, //菜单展开
+      isCollapse: false, //菜单展开
     };
   },
+  methods:{
+    //退出登录
+    logOut(){
+      //清除tagView
+      localStorage.setItem("tagView", '');
+      this.jump('Login')
+    }
+  }
 };
 </script>
 

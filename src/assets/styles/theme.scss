@@ -9,17 +9,27 @@ $hover-main-font-color: #fff;
     .el-header {
       background: $main-bg-color;
       box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.5);
+      .userInfoBox{
+        >div{
+          i{
+            color: #fff;
+          }
+          span{
+            color: #fff;
+          }
+        }
+      }
     }
     .el-container {
       .el-aside {
         background-color: #fff;
         box-shadow: -10px 10px 20px 0px #000000;
-        .unfoldBtn{
+        .isCollapseBtn{
           i{
-            color: #fff;
-            font-size: 30px;
+            color: $main-bg-color;
+            font-size: 23px;
           }
-          background-color: #e41313;
+          background-color:#fff;
         }
       }
       .el-main {
@@ -40,7 +50,7 @@ $hover-main-font-color: #fff;
         color: #fff;
       }
       i:hover {
-        color: $hover-main-bg-color
+        background-color: $hover-main-bg-color
       }
     }
     .tagItem:hover {

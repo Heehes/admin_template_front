@@ -1,18 +1,18 @@
 <template>
   <div class="tagView">
-    <div class="tagItem" v-for="i in 20" :class="{ checked: $route.name == 'Home' }" @click="jump('Home')">
-      <span>首页</span>
-    </div>
-    <div
-      class="tagItem"
-      :class="{ checked: $route.name == tag.name, cantClose: tag.meta ? tag.meta.cantClose : false }"
-      @click="jump(tag.name)"
-      v-for="(tag, index) in list"
-      :key="index"
-    >
-      <span>{{ tag.meta ? tag.meta.title : tag.name }}</span>
-      <i class="iconfont u-guanbi" @click.stop="toggleTag(tag, 'remove')" />
-    </div>
+    <el-scrollbar>
+      <div class="tagLi" v-for="(tag, index) in list" :key="index">
+        <div
+          v-if="!tag.hidden"
+          @click="jump(tag.name)"
+          class="tagItem"
+          :class="{ checked: $route.name == tag.name, cantClose: tag.meta ? tag.meta.cantClose : false }"
+        >
+          <span>{{ tag.meta.title }}</span>
+          <i class="iconfont u-guanbi" @click.stop="toggleTag(tag, 'remove')" />
+        </div>
+      </div>
+    </el-scrollbar>
   </div>
 </template>
 <script>
@@ -21,7 +21,7 @@ export default {
   //cache是否缓存
   props: ["cache"],
   computed: {
-    list: function() {
+    list: function () {
       return this.$store.state.tagList;
     },
   },
@@ -34,20 +34,38 @@ export default {
     },
   },
   mounted() {
+    //获取已缓存
     if (this.cache) {
-    } else {
-      // 设置首页
-      this.$store.commit("setTagList", [this.$router.options.routes.find((item) => item.path == "/").children[0]]);
+      this.$store.commit("setTagList", this.lsGet("tagView") || []);
     }
+    // 添加首页
+    this.toggleTag(
+      this.$router.options.routes.find((item) => item.path == "/").children[0],
+      "add"
+    );
+    //添加当前页面
+    this.toggleTag(this.$route, "add");
   },
   methods: {
-    toggleTag(tag, type) {
+    toggleTag(intoTag, type) {
+      let tag = {
+        meta: {
+          title: intoTag.meta ? intoTag.meta.title : intoTag.name,
+          cantClose: intoTag.meta ? intoTag.meta.cantClose : false
+        },
+        hidden: typeof(intoTag.hidden)=='undefined'? false : intoTag.hidden   ,
+        name: intoTag.name,
+        path: intoTag.path,
+      };
+      // 新增
       let data = [];
       if (type == "add") {
-        if (this.list.find((item) => item.path == tag.path) || tag.path == "/home") return;
+        //是否已存在
+        if (this.list.find((item) => item.path == tag.path)) return;
         data = this.list;
         data.push(tag);
       } else {
+        // 删除
         data = this.list.filter((item) => {
           if (item.path != tag.path) {
             return item;
@@ -60,7 +78,9 @@ export default {
         });
       }
       this.$store.commit("setTagList", data);
+      //缓存到ls
       if (this.cache) {
+        this.lsSet("tagView", data);
       }
     },
   },
@@ -73,50 +93,76 @@ export default {
   margin-left: 30px;
   height: 30px;
   margin-bottom: 10px;
-  .tagItem {
-    padding: 0 5px;
-    display: inline-block;
-    width: auto;
-    height: 30px;
-    line-height: 30px;
-    font-size: 0.9em;
-    font-weight: bold;
-    margin-right: 10px;
-    cursor: pointer;
-    user-select: none;
-    border-radius: 8px;
-    overflow: hidden;
-    span {
-      letter-spacing: 1px;
-      transition: padding 0.3s;
-      float: left;
-      padding: 0 15px;
-    }
-    i {
-      transition: width 0.3s;
-      font-size: 0.8em;
-      float: left;
-      overflow: hidden;
-      width: 0px;
-    }
-    i:hover {
-    }
-  }
-  .tagItem:hover {
-    span {
+  .tagLi {
+      display: inline-block;
+    .tagItem {
+      /* float: left; */
+      margin-top: 4px;
       padding: 0 5px;
+      width: auto;
+      height: 30px;
+      line-height: 30px;
+      font-size: 0.9em;
+      font-weight: bold;
+      margin-right: 10px;
+      cursor: pointer;
+      user-select: none;
+      border-radius: 8px;
+      overflow: hidden;
+      span {
+        letter-spacing: 1px;
+        transition: padding 0.3s;
+        float: left;
+        padding: 0 15px;
+      }
+      i {
+        margin-top: 5px;
+        border-radius: 50%;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        transition: width 0.3s;
+        font-size: 0.8em;
+        float: left;
+        overflow: hidden;
+        width: 0px;
+      }
+      i:hover {
+      }
     }
-    i {
-      width: 20px;
+    .tagItem:hover {
+      span {
+        padding: 0 5px;
+      }
+      i {
+        width: 20px;
+      }
+    }
+    .tagItem.cantClose:hover {
+      span {
+        padding: 0 15px !important;
+      }
+      i {
+        width: 0px !important;
+      }
     }
   }
-  .tagItem.cantClose:hover {
-    span {
-      padding: 0 15px !important;
-    }
-    i {
-      width: 0px !important;
-    }
-  }
+}
+
+//el-scrollbar
+.el-scrollbar {
+  text-align: left;
+  width: 100%;
+}
+.el-scrollbar__wrap {
+  overflow-x: scroll;
+  overflow-y: scroll;
+  width: 110%;
+  height: 120%;
+}
+.tagView::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 </style>
