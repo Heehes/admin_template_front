@@ -10,6 +10,12 @@ export default {
             name: 'Factory',
             component: () => import('@/views/mainData/factory.vue'),
             meta: { title: '工厂' }
+        },
+        {
+            path: '/factory2',
+            name: 'Factory2',
+            component: () => import('@/views/mainData/factory.vue'),
+            meta: { title: '工厂2' }
         }
     ]
 }

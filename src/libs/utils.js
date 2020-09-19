@@ -46,8 +46,9 @@ utils.install = function(Vue, option) {
   };
   //页面权限验证
   Vue.prototype.authPower = function(code) {
+    console.log(code)
     if(code){
-      
+
     }
     return true
   };
