@@ -36,6 +36,138 @@ body,
   overflow: hidden;
 }
 
+//labelFont
+.labelContent{
+  padding-left: 20px;
+  background-image:url('../imgs/menu-active.png');
+  background-repeat: no-repeat;
+  background-size: 5px 20px;
+  background-position: 10px center;
+  text-align: left;
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.2em;
+  font-weight: bold
+}
+
+// u-form el-form
+.el-form.u-form{
+  .el-form-item{
+    .el-form-item__content{
+      text-align: left;
+    }
+  }
+}
+.el-form{
+  .el-input{
+    min-width: 150px;
+    max-width: 200px;
+    .el-input__inner{
+      color: #606266;
+      background-color: rgb(238, 243, 255);
+      border: 1px solid #417df5;
+    }
+  }
+}
+.el-pagination{
+  text-align: right;
+}
+
+.searchBox{
+  padding: 20px 10px 10px 10px;
+  border-bottom: 10px solid #eee;
+  display: flex;
+  .formBox{
+    flex:auto;
+    .el-form{
+      text-align: left;
+      .el-form-item{
+        margin-bottom: 10px !important
+      }
+    }
+  }
+  .btnBox{
+    text-align: left;
+    flex:auto;
+    padding: 0 0px;
+    .el-button{
+      margin-left: 5px;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+//表单input宽度unitWidth
+.unitWidth.el-form{
+  text-align: left;
+  .el-form-item{
+    margin-bottom: 10px;
+    .el-form-item__content{
+      .el-select,.el-date-editor,.el-input,.el-input-number{
+        width: 180px;
+      }
+    }
+  }
+}
+
+//el-table
+.tableBox{
+  padding: 10px;
+  .el-table{
+    border: 1px solid #e4e5e6;
+    border-right:none;
+  }
+}
+.el-table{
+  width: 100%;
+  .el-table__header tr th{
+    background-color: #eef3ff;
+  }
+  th.is-leaf,td{
+    border-bottom: none;
+    border-right: 1px solid #e4e5e6
+  }
+  .editBtn{
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 1.7em;
+    color: rgb(54, 196, 102);
+  }
+  .delBtn{
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 1.4em;
+    color: rgb(247, 75, 75);
+  }
+}
+.el-table--striped .el-table__body tr.el-table__row--striped td{
+  background-color: rgb(248, 250, 252);
+}
+.el-table.center tr{
+  th .cell{
+    text-align: center;
+  }
+  td .cell{
+    text-align: center;
+  }
+}
+.el-checkbox__inner{
+  border: 1px solid #afb0b1;
+  width: 18px;
+  height: 18px;
+}
+.el-checkbox__inner::after{
+  border: 2px solid #FFF;
+  border-left: 0;
+  border-top: 0;
+  height: 10px;
+  left: 6px;
+}
+.el-checkbox__input.is-indeterminate .el-checkbox__inner::before{
+  top: 5px;
+  height: 6px;
+}
+
 // 菜单
 .u-menu {
   height: 100%;
@@ -126,6 +258,17 @@ body,
   width: 100%;
   height: 100%;
   .el-header {
+    .logoInfo{
+      float: left;
+      line-height: 80px;
+      color: white;
+      span{
+        font-weight: bold;
+        margin-left: 10px;
+        font-size: 1.2em;
+      }
+      // height: ;
+    }
     .userInfoBox {
       height: 100%;
       float: right;
@@ -182,7 +325,76 @@ body,
       .pageBox {
         height: calc(100% - 40px);
         border-radius: 10px;
+        >div{
+          width: 100%;
+          height: 100%;
+        }
+        .page{
+          position: relative;
+          box-sizing: border-box;
+          padding: 20px 10px 10px 10px;
+          .bottomBtnBox{
+            width: 100%;
+            height: 8vh;
+            position: absolute;
+            bottom: 0;
+            left: 0px;
+            padding: 1.5vh 0;
+            border-top: 1px solid #c4c4c4;
+          }
+        }
       }
+    }
+  }
+}
+
+// element-ui
+.el-button.long{
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.loginBox {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-image: url("../imgs/loginBg.png");
+  background-size: 100% 100%;
+  .login {
+    width: 50vh;
+    height: 55vh;
+    background-color: white;
+    border-radius: 10px;
+    position: absolute;
+    top: 25vh;
+    right: 15vh;
+    box-shadow: 0 0 20px #0000004d;
+    padding: 5vh 5vh 0 5vh;
+    text-align: left;
+    color: #417df5;
+    h2 {
+      font-size: 4vh;
+      line-height: 8vh;
+    }
+    h4{
+      line-height: 4vh;
+    }
+    .el-input.loginInput {
+      line-height: 8vh;
+      .el-input__inner{
+        border: none;
+        box-shadow: 0 0 10px #00000026;
+        color: #417df5 !important;
+      }
+      i{
+        color: #417df5;
+      }
+    }
+    .el-button{
+      position: absolute;
+      bottom: 5vh;
+      left: 5vh;
+      width: 40vh;
     }
   }
 }

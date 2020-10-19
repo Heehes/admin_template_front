@@ -19,8 +19,15 @@ const routes = [
     component: Login,
   },
   {
+    path: "/401",
+    name: "401",
+    component: () => import("@/views/errorPage/401"),
+    hidden: true,
+  },
+  {
     path: "/404",
-    component: () => import("@/views/404"),
+    name: "404",
+    component: () => import("@/views/errorPage/404"),
     hidden: true,
   },
   {
@@ -35,7 +42,25 @@ const routes = [
         component: () => import("@/views/Home/home.vue"),
         meta: {
           title: "首页",
-          cantClose: true,
+          icon: 'iconfont u-shouye',
+          cantClose: true
+        },
+      }
+    ],
+  },
+  {
+    // 个人中心
+    path: "/personal",
+    component: Layout,
+    redirect: "/home",
+    children: [
+      {
+        path: "/personal",
+        name: 'Personal',
+        component: () => import("@/views/Personal/personal.vue"),
+        meta: {
+          title: "个人中心",
+          role: 'personal'
         },
       }
     ],
@@ -55,10 +80,11 @@ const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch((err) => err);
 };
-
 router.beforeEach((to, from, next) => {
-  // console.log(to, from, next)
-  next();
+  next()
+  // next({
+  //   path: '/401'
+  // })
 });
 
 export default router;

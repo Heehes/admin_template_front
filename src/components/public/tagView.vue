@@ -4,11 +4,11 @@
       <div class="tagLi" v-for="(tag, index) in list" :key="index">
         <div
           v-if="!tag.hidden"
-          @click="jump(tag.name)"
+          @click="jump(tag.path)"
           class="tagItem"
           :class="{ checked: $route.name == tag.name, cantClose: tag.meta ? tag.meta.cantClose : false }"
         >
-          <span>{{ tag.meta.title }}</span>
+          <span><i v-if="tag.meta && tag.meta.icon" :class="tag.meta.icon" />{{ tag.meta.title }}</span>
           <i class="iconfont u-guanbi" @click.stop="toggleTag(tag, 'remove')" />
         </div>
       </div>
@@ -50,6 +50,7 @@ export default {
     toggleTag(intoTag, type) {
       let tag = {
         meta: {
+          icon: intoTag.meta ? intoTag.meta.icon : intoTag.icon,
           title: intoTag.meta ? intoTag.meta.title : intoTag.name,
           cantClose: intoTag.meta ? intoTag.meta.cantClose : false
         },
@@ -61,7 +62,7 @@ export default {
       let data = [];
       if (type == "add") {
         //是否已存在
-        if (this.list.find((item) => item.path == tag.path)) return;
+        if (this.list.find((item) => item.path.toLowerCase() == tag.path.toLowerCase())) return;
         data = this.list;
         data.push(tag);
       } else {
@@ -114,8 +115,13 @@ export default {
         transition: padding 0.3s;
         float: left;
         padding: 0 15px;
+        i{
+          font-weight: 100;
+          padding-right: 5px;
+            line-height: 0px;
+        }
       }
-      i {
+      .u-guanbi {
         margin-top: 5px;
         border-radius: 50%;
         height: 20px;
@@ -127,14 +133,14 @@ export default {
         overflow: hidden;
         width: 0px;
       }
-      i:hover {
+      .u-guanbi:hover {
       }
     }
     .tagItem:hover {
       span {
         padding: 0 5px;
       }
-      i {
+      .u-guanbi {
         width: 20px;
       }
     }
@@ -142,7 +148,7 @@ export default {
       span {
         padding: 0 15px !important;
       }
-      i {
+      .u-guanbi {
         width: 0px !important;
       }
     }

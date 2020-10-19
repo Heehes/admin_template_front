@@ -7,6 +7,7 @@ $hover-main-font-color: #fff;
 .theme {
   .el-container {
     .el-header {
+      color: #fff;
       background: $main-bg-color;
       box-shadow: 0 0px 10px 0px rgba(0, 0, 0, 0.5);
       .userInfoBox{
@@ -46,10 +47,10 @@ $hover-main-font-color: #fff;
       span {
         color: $main-border-color;
       }
-      i {
+      .u-guanbi {
         color: #fff;
       }
-      i:hover {
+      .u-guanbi:hover {
         background-color: $hover-main-bg-color
       }
     }
@@ -71,7 +72,7 @@ $hover-main-font-color: #fff;
       span {
         padding: 0 15px;
       }
-      i {
+      .u-guanbi {
         width: 0px;
       }
     }
@@ -79,9 +80,42 @@ $hover-main-font-color: #fff;
       span {
         padding: 0 5px;
       }
-      i {
+      .u-guanbi {
         width: 20px;
       }
     }
   }
+}
+
+.el-button--primary{
+  background-color: #417df5;
+  border-color: #417df5;
+}
+.el-button--primary:focus, .el-button--primary:hover{
+  background: #6d9bf7;
+  border-color: #6d9bf7;
+}
+
+.el-button--success {
+  background-color: rgb(54, 196, 102);
+  border-color: rgb(54, 196, 102);
+}
+.el-button--success:focus, .el-button--success:hover {
+  background:  rgb(128, 235, 164);
+  border-color: rgb(128, 235, 164);
+}
+
+.el-button--warning {
+  background-color: rgb(249, 122, 24);
+  border-color: rgb(249, 122, 24);
+}
+.el-button--warning:focus, .el-button--warning:hover {
+  background: rgb(243, 165, 106);
+  border-color:rgb(243, 165, 106);
+}
+.el-pager li.active{
+  color: #417df5;
+}
+.el-select-dropdown__item.selected{
+  color: #417df5;
 }

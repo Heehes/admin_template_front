@@ -18,39 +18,46 @@ utils.install = function(Vue, option) {
     if (typeof name != "string") {
       console.error("lsSet Error: name type error");
     } else {
-      return JSON.parse(localStorage.getItem(name));
+      if(localStorage.getItem(name))
+        return JSON.parse(localStorage.getItem(name));
+      return null
     }
   };
-  Vue.prototype.getDateTime = function(type) {
-    var date = new Date();
-    var y = date.getFullYear();
-    var m = date.getMonth() + 1;
-    m = m < 10 ? "0" + m : m;
-    var d = date.getDate();
-    d = d < 10 ? "0" + d : d;
-    var h = date.getHours();
-    h = h < 10 ? "0" + h : h;
-    var minute = date.getMinutes();
-    var second = date.getSeconds();
-    minute = minute < 10 ? "0" + minute : minute;
-    second = second < 10 ? "0" + second : second;
-    return y + "-" + m + "-" + d + " " + h + ":" + minute + ":" + second;
+  // 获取当前时间
+  Vue.prototype.getDateTime = function(fmt) {
+    if(!fmt) fmt = 'yyyy-MM-dd hh:mm:ss'
+    let data = new Date();
+    var o = {
+      "M+": data.getMonth() + 1, // 月份
+      "d+": data.getDate(), // 日
+      "h+": data.getHours(), // 小时
+      "m+": data.getMinutes(), // 分
+      "s+": data.getSeconds(), // 秒
+      "q+": Math.floor((data.getMonth() + 3) / 3), // 季度
+      S: data.getMilliseconds(), // 毫秒
+    };
+    if (/(y+)/.test(fmt))
+      fmt = fmt.replace(
+        RegExp.$1,
+        (data.getFullYear() + "").substr(4 - RegExp.$1.length)
+      );
+    for (var k in o)
+      if (new RegExp("(" + k + ")").test(fmt))
+        fmt = fmt.replace(
+          RegExp.$1,
+          RegExp.$1.length == 1
+            ? o[k]
+            : ("00" + o[k]).substr(("" + o[k]).length)
+        );
+    return fmt;
   };
   //页面跳转
-  Vue.prototype.jump = function(pagename) {
-    if (pagename == "back") {
+  Vue.prototype.jump = function(path) {
+    if (path == "back") {
       this.$router.go(-1);
     } else {
-      this.$router.push({ name: pagename });
+      this.$router.push({ path: path });
     }
-  };
-  //页面权限验证
-  Vue.prototype.authPower = function(code) {
-    console.log(code)
-    if(code){
-
-    }
-    return true
   };
 };
 

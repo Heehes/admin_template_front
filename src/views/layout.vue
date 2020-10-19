@@ -1,6 +1,10 @@
 <template>
   <el-container>
     <el-header>
+      <div class="logoInfo">
+        <img src="logo.png" />
+        <span>XXX公司系统后台</span>
+      </div>
       <div class="userInfoBox">
         <div><i class="iconfont u-59" /><span>2020-04-03 15:48:12</span></div>
         <div><i class="iconfont u-yonghu1" /><span>您好，哈哈哈</span></div>
@@ -15,6 +19,7 @@
         <Menu :isCollapse="isCollapse"></Menu>
       </el-aside>
       <el-main>
+        <!--TagView  cache 是否开启缓存 -->
         <TagView :cache="true"></TagView>
         <div class="pageBox" style="height:calc(100% - 40px)">
           <transition name="fade-transform" mode="out-in">
@@ -50,7 +55,7 @@ export default {
     logOut(){
       //清除tagView
       localStorage.setItem("tagView", '');
-      this.jump('Login')
+      this.jump('/login')
     }
   }
 };
