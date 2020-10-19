@@ -55,6 +55,7 @@ export default {
     logOut(){
       //清除tagView
       localStorage.setItem("tagView", '');
+      this.lsSet('userInfo',{})
       this.jump('/login')
     }
   }

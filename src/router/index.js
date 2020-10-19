@@ -80,11 +80,22 @@ const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
   return originalPush.call(this, location).catch((err) => err);
 };
+
 router.beforeEach((to, from, next) => {
-  next()
-  // next({
-  //   path: '/401'
-  // })
+  if(to.fullPath!="/login" && to.fullPath!="/404" &&to.fullPath!="/401"){
+    if(localStorage.getItem('userInfo')=='{}' || !localStorage.getItem('userInfo')){
+      next({
+        path: '/login'
+      })
+    }else{
+      next()
+    }
+    // next({
+    //   path: '/401'
+    // })
+  }else{
+    next()
+  }
 });
 
 export default router;

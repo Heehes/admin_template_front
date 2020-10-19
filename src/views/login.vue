@@ -21,6 +21,7 @@ export default {
   },
   methods: {
     login() {
+      this.lsSet('userInfo',{userName:'某某'})
       this.jump("/home");
     },
   },
